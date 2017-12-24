@@ -6,7 +6,7 @@
       <button @click="add_note">Add note</button>
     </div>
     <div> <!-- list of notes -->
-
+      <div v-for="note of notes">{{note.title}}</div>
     </div>
     <textarea v-model="note_content"></textarea>
     <aside v-html="render_note"></aside>
