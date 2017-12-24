@@ -6,7 +6,7 @@
       <button @click="addNote">Add note</button>
     </div>
     <div> <!-- list of notes -->
-      <div v-for="note of notes" @click="selectNote(note)">{{note.title}}</div>
+      <div v-for="note of notes" @click="selectNote(note)" :class="{ selected: note === selectedNote }">{{note.title}}</div>
     </div>
     <textarea v-model="selectedNote.content"></textarea>
     <aside v-html="notePreview"></aside>
@@ -127,4 +127,8 @@ export default {
 </script>
 
 <style>
+.selected {
+  background: #40b883;
+  color: white;
+}
 </style>
