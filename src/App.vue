@@ -1,15 +1,15 @@
 <template>
   <div id="app">
     <hero title="all-note"></hero>  <!-- kommt später wahrschienlich weg -->
-    <aside></aside> <!-- display all notes -->
+    <aside></aside> <!-- display list of notes -->
     <div> <!-- Toolbar -->
       <button @click="addNote">Add note</button>
     </div>
     <div> <!-- list of notes -->
       <div v-for="note of notes" @click="selectNote(note)" :class="{ selected: note === selectedNote }">{{note.title}}</div>
     </div>
-    <textarea v-model="selectedNote.content"></textarea>
-    <aside v-html="notePreview"></aside>
+    <textarea v-if="selectedNote"> v-model="selectedNote.content"></textarea>
+    <aside v-if="selectedNote"> v-html="notePreview"></aside>
   </div>
 </template>
 
