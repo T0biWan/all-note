@@ -8,8 +8,8 @@
     <div> <!-- list of notes -->
       <div v-for="note of notes" @click="selectNote(note)" :class="{ selected: note === selectedNote }">{{note.title}}</div>
     </div>
-    <textarea v-if="selectedNote"> v-model="selectedNote.content"></textarea>
-    <aside v-if="selectedNote"> v-html="notePreview"></aside>
+    <textarea v-if="selectedNote" v-model="selectedNote.content"></textarea>
+    <aside v-if="selectedNote" v-html="notePreview"></aside>
   </div>
 </template>
 
@@ -48,8 +48,8 @@ export default {
 
     notePreview () {
       // Markdown rendered to HTML
-      // return this.selectedNote ? marked(this.selectedNote.content) : ''
-      return this.selectedNote.content;
+      return this.selectedNote ? marked(this.selectedNote.content) : ''
+      // return this.selectedNote.content;
     },
   },
 
@@ -89,7 +89,7 @@ export default {
       const note = {
         id: String(time),
         title: 'New note ' + (this.notes.length + 1),
-        content: '**Hi!** This notebook is using [markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) for formatting!',
+        content: "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn",
         created: time,
         favorite: false,
       }
