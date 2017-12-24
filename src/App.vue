@@ -42,14 +42,12 @@ export default {
       deep: true,
     },
   },
+
+  created () {
+    this.note_content = localStorage.getItem('note_content') || 'Note your thoughts in **markdown**!'
+  },
 }
 </script>
 
 <style>
-textarea {
-  resize: none;
-  border: none;
-  box-sizing: border-box;
-  font-family: monospace;
-}
 </style>
