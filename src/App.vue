@@ -22,11 +22,24 @@ export default {
     };
   },
 
-
   computed: {
     render_note () {
       // return marked(this.note_content)
       return this.note_content
+    },
+  },
+
+  methods: {
+    save_note (val) {
+      console.log('saving note:', val)
+      localStorage.setItem('note_content', val)
+    },
+  },
+
+  watch: {
+    note_content: {
+      handler: 'save_note',
+      deep: true,
     },
   },
 }
