@@ -18,7 +18,7 @@ export default {
 
   data() {
     return {
-      note_content: "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn."
+      note_content: localStorage.getItem('content') || 'Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.'
     };
   },
 
@@ -41,10 +41,6 @@ export default {
       handler: 'save_note',
       deep: true,
     },
-  },
-
-  created () {
-    this.note_content = localStorage.getItem('note_content') || 'Note your thoughts in **markdown**!'
   },
 }
 </script>
