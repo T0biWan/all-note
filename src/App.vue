@@ -1,8 +1,15 @@
 <template>
   <div id="app">
-    <hero title="all-note"></hero>  <!-- kommt später wahrschienlich weg !-->
+    <hero title="all-note"></hero>  <!-- kommt später wahrschienlich weg -->
+    <aside></aside> <!-- display all notes -->
+    <div> <!-- Toolbar -->
+      <button @click="add_note">Add note</button>
+    </div>
+    <div> <!-- list of notes -->
+
+    </div>
     <textarea v-model="note_content"></textarea>
-    <aside class="preview" v-html="render_note"></aside>
+    <aside v-html="render_note"></aside>
   </div>
 </template>
 
@@ -18,7 +25,8 @@ export default {
 
   data() {
     return {
-      note_content: localStorage.getItem('content') || 'Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.'
+      note_content: localStorage.getItem('note_content') || "Ph'nglui mglw'nafh **Cthulhu** R'lyeh wgah'nagl fhtagn.",
+      notes: [],
     };
   },
 
@@ -33,6 +41,20 @@ export default {
     save_note (val) {
       console.log('saving note:', val)
       localStorage.setItem('note_content', val)
+    },
+
+    add_note () {
+      const time = Date.now()
+      // Default new note
+      const note = {
+        id: String(time),
+        title: 'New note ' + (this.notes.length + 1),
+        note_content: '**Hi!** This notebook is using [markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) for formatting!',
+        created: time,
+        favorite: false,
+      }
+      // Add to the list
+      this.notes.push(note)
     },
   },
 
