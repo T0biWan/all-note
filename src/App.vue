@@ -15,6 +15,7 @@
 
 <script>
 import hero from "./components/hero.vue"
+var marked = require('marked');
 
 export default {
   name: 'app',
@@ -49,7 +50,9 @@ export default {
     notePreview () {
       // Markdown rendered to HTML
       return this.selectedNote ? marked(this.selectedNote.content) : ''
+      // console.log(marked('I am using __markdown__.'));
       // return this.selectedNote.content;
+      // return marked(this.selectedNote.content);
     },
   },
 
