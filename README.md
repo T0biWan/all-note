@@ -1,5 +1,5 @@
 # all-note
-all-note makes beautiful note taking easy  
+all-note makes beautiful note taking easy.  
 all-note is build with the help of:
 - [Vue.js](https://vuejs.org/)
 - [Marked](https://github.com/chjj/marked)
