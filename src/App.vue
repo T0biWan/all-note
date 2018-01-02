@@ -1,16 +1,30 @@
 <template>
-  <div id="app">
-    <hero title="all-note"></hero>  <!-- kommt später wahrschienlich weg -->
-    <aside></aside> <!-- display list of notes -->
-    <div> <!-- Toolbar -->
-      <button @click="addNote">Add note</button>
+<div id="app">
+  <hero title="all-note"></hero>
+  <!-- kommt später wahrschienlich weg -->
+
+  <div class="tile is-ancestor">
+    <div class="tile is-parent is-vertical">
+      <div class="tile is-child box">
+        <button @click="addNote">Add note</button>
+      </div>
+      <div class="tile is-child box">
+        <div v-for="note of notes" @click="selectNote(note)" :class="{ selected: note === selectedNote }">{{note.title}}</div>
+      </div>
     </div>
-    <div> <!-- list of notes -->
-      <div v-for="note of notes" @click="selectNote(note)" :class="{ selected: note === selectedNote }">{{note.title}}</div>
+    <div class="tile is-parent is-vertical is-9">
+      <div class="tile is-child box">
+        <button @click="toggleNotePreview">Render</button>
+      </div>
+      <div class="tile is-child box">
+        <textarea v-if="selectedNote, !showNotePreview" v-model="selectedNote.content"></textarea>
+        <div v-if="showNotePreview" v-html="notePreview"></div>
+      </div>
     </div>
-    <textarea v-if="selectedNote" v-model="selectedNote.content"></textarea>
-    <aside v-if="selectedNote" v-html="notePreview"></aside>
   </div>
+
+
+</div>
 </template>
 
 <script>
@@ -30,6 +44,7 @@ export default {
       notes: JSON.parse(localStorage.getItem('notes')) || [],
       // selected_note_id: null,
       selectedId: localStorage.getItem('selected-id') || null,
+      showNotePreview: false,
     };
   },
 
@@ -42,12 +57,12 @@ export default {
     // selected_note () {
     //   return this.notes.find(note => note.id === this.selected_note_id)
     // },
-    selectedNote () {
+    selectedNote() {
       // We return the matching note with selectedId
       return this.notes.find(note => note.id === this.selectedId)
     },
 
-    notePreview () {
+    notePreview() {
       // Markdown rendered to HTML
       return this.selectedNote ? marked(this.selectedNote.content) : ''
       // console.log(marked('I am using __markdown__.'));
@@ -80,13 +95,13 @@ export default {
     //   this.notes.push(note)
     // },
 
-    selectNote (note) {
+    selectNote(note) {
       // This will update the 'selectedNote' computed property
       this.selectedId = note.id
     },
 
     // Add a note with some default content and select it
-    addNote () {
+    addNote() {
       const time = Date.now()
       // Default new note
       const note = {
@@ -102,10 +117,14 @@ export default {
       this.selectNote(note)
     },
 
-    saveNotes () {
+    saveNotes() {
       // Don't forget to stringify to JSON before storing
       localStorage.setItem('notes', JSON.stringify(this.notes))
       console.log('Notes saved!', new Date())
+    },
+
+    toggleNotePreview() {
+      this.showNotePreview = !this.showNotePreview;
     },
   },
 
@@ -122,7 +141,7 @@ export default {
       deep: true,
     },
     // Let's save the selection too
-    selectedId (val, oldVal) {
+    selectedId(val, oldVal) {
       localStorage.setItem('selected-id', val)
     },
   },
