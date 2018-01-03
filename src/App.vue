@@ -6,8 +6,8 @@
   <div class="tile is-ancestor">
     <div class="tile is-parent is-vertical">
       <div class="tile is-child box">
-        <button @click="addNote">Add note</button>
-        <!-- <button @click="TODO">Delete note</button> -->
+        <button @click="addNote"><i class="fas fa-plus"></i></button>
+        <button><i class="far fa-trash-alt"></i></button>
       </div>
       <div class="tile is-child box">
         <div v-for="note of notes" @click="selectNote(note)" :class="{ selected: note === selectedNote }">{{note.title}}</div>
@@ -15,7 +15,12 @@
     </div>
     <div class="tile is-parent is-vertical is-9">
       <div class="tile is-child box">
-        <button @click="toggleNotePreview">Render</button>
+        <button @click="toggleNotePreview"><i class="fab fa-empire"></i></button>
+        <!-- <button @click="toggleNotePreview"><i class="fas fa-flask"></i></button> -->
+        <!-- <button @click="toggleNotePreview"><i class="fas fa-eye"></i></button> -->
+        <!-- <button @click="toggleNotePreview"><i class="fab fa-react"></i></button> -->
+        <!-- <button @click="toggleNotePreview"><i class="fas fa-toggle-off"></i></button> -->
+        <!-- <button @click="toggleNotePreview"><i class="fas fa-toggle-on"></i></button> -->
       </div>
       <div class="tile is-child box">
         <textarea v-if="isTextareVisible" v-model="selectedNote.content"></textarea>
