@@ -7,6 +7,7 @@
     <div class="tile is-parent is-vertical">
       <div class="tile is-child box">
         <button @click="addNote">Add note</button>
+        <!-- <button @click="TODO">Delete note</button> -->
       </div>
       <div class="tile is-child box">
         <div v-for="note of notes" @click="selectNote(note)" :class="{ selected: note === selectedNote }">{{note.title}}</div>
@@ -17,7 +18,7 @@
         <button @click="toggleNotePreview">Render</button>
       </div>
       <div class="tile is-child box">
-        <textarea v-if="selectedNote, !showNotePreview" v-model="selectedNote.content"></textarea>
+        <textarea v-if="isTextareVisible" v-model="selectedNote.content"></textarea>
         <div v-if="showNotePreview" v-html="notePreview"></div>
       </div>
     </div>
@@ -69,6 +70,10 @@ export default {
       // return this.selectedNote.content;
       // return marked(this.selectedNote.content);
     },
+
+    isTextareVisible() {
+      return this.selectedNote && !this.showNotePreview;
+    }
   },
 
   methods: {
